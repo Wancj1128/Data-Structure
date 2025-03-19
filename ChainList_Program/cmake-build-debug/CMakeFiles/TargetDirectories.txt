@@ -1,3 +1,0 @@
-/Users/wancj/@dev/Data Structurs/ChainList_Program/cmake-build-debug/CMakeFiles/DataStructurs.dir
-/Users/wancj/@dev/Data Structurs/ChainList_Program/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/wancj/@dev/Data Structurs/ChainList_Program/cmake-build-debug/CMakeFiles/rebuild_cache.dir
