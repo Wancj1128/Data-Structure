@@ -71,6 +71,23 @@ void Insert(List& list, int position, ElemType e) {
 	list.size++;
 }
 
+//链表的删除操作：
+void DeleteList(List& list, int position) {
+	Node* p = list.head;
+	if (position <= 0 || p->next == NULL) {
+		std::cout<<"要删除的位置错误！";
+	}
+
+	for (int i = 0; i < position - 1; i++) {
+		p = p->next;
+	}
+	Node* q = p->next;
+	p->next = q->next;
+	//释放要删除节点的空间
+	delete q;
+	list.size--;
+}
+
 //链表的遍历
 void ListElem(List& list) {
 	if (list.size == 0) {
@@ -82,9 +99,21 @@ void ListElem(List& list) {
 		std::cout << position->data << "\t";
 		position = position->next;
 	}
+	std::cout << "\n";
 }
 
-
+//释放链表
+void FreeList(List* list) {
+	Node* p = list->head->next;
+	Node* q;
+	while (p != NULL) {
+		q = p->next;
+		free(p);
+		p = q;
+		list->size--;
+	}
+	list->head->next = NULL;
+}
 
 int main() {
 	List* list = InitList();
@@ -95,5 +124,9 @@ int main() {
 	InsertTail(*list,5);
 	InsertTail(*list,6);
 	Insert(*list, 1, 10);
+	ListElem(*list);
+	DeleteList(*list, 2);
+	ListElem(*list);
+	FreeList(list);
 	ListElem(*list);
 }
