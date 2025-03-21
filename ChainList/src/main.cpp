@@ -115,6 +115,21 @@ void FreeList(List* list) {
 	list->head->next = NULL;
 }
 
+//单链表的应用：
+//1): 使用快慢指针可找到倒数第n个节点所对应的数据
+Node* FindNodeFS(List& list, int k) {
+	Node* FastNode = list.head->next;
+	for (int i = 0; i < k; i++) {
+		FastNode = FastNode->next;
+	}
+	Node* SlowNode = list.head->next;
+	while (FastNode != NULL) {
+		FastNode = FastNode->next;
+		SlowNode = SlowNode->next;
+	}
+	return SlowNode;
+}
+
 int main() {
 	List* list = InitList();
 	insertHead(*list, 1);
@@ -127,6 +142,8 @@ int main() {
 	ListElem(*list);
 	DeleteList(*list, 2);
 	ListElem(*list);
-	FreeList(list);
 	ListElem(*list);
+	Node* position = FindNodeFS(*list, 3);
+	std::cout << "倒数第三个节点的值为：" << position->data;
+	FreeList(list);
 }
