@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -DCMAKE_C_COMPILER=/opt/homebrew/Cellar/gcc/14.2.0_1/bin/aarch64-apple-darwin24-gcc-14 -DCMAKE_CXX_COMPILER=/opt/homebrew/Cellar/gcc/14.2.0_1/bin/aarch64-apple-darwin24-g++-14 -G Ninja -S "/Users/wancj/@dev/Data Structurs/ChainList_Use2/Cmake" -B "/Users/wancj/@dev/Data Structurs/ChainList_Use2/Cmake/cmake-build-debug"
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/wancj/@dev/Data Structurs/ChainList_Use2/Cmake/cmake-build-debug
