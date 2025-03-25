@@ -21,12 +21,16 @@ Node* InitList() {
 }
 
 //双链表的头插法操作
-void HeadInsert(Node* list, ElemType e) {
+int HeadInsert(Node* list, ElemType e) {
     Node* NewNode = new Node;   //创建一个新的节点，并将e传入data中
     NewNode->data = e;
-    NewNode->prev = list->next;
+    NewNode->prev = list;
     NewNode->next = list->next;
+    if (list->next != nullptr) {
+        list->next->prev = NewNode;
+    }
     list->next = NewNode;
+    return 1;
 }
 
 //双链表的尾插法操作
@@ -40,6 +44,65 @@ void TailInsert(Node* list, ElemType e) {
     NewNode->next = position->next;
     NewNode->prev = position;
     position->next = NewNode;
+}
+
+//在指定的位置插入数据
+int Insert(Node* list, int position, ElemType e) {
+    if (position < 1) {  // position 不能小于 1，因为 1 才是第 1 个数据元素
+        std::cout << "非法的插入位置！\n";
+        return 0;
+    }
+
+    Node* NewNode = new Node;
+    NewNode->data = e;
+
+    Node* l = list->next; // 从第 1 个数据节点开始遍历
+    for (int i = 0; i < position-1 && l != nullptr; i++) {
+        l = l->next;
+    }
+
+    if (l == nullptr) {
+        std::cout << "插入位置超出范围！\n";
+        return 0;
+    }
+
+    // 插入新节点
+    NewNode->next = l;
+    NewNode->prev = l->prev;
+
+    if (l->prev != nullptr) {
+        l->prev->next = NewNode;
+    }
+
+    l->prev = NewNode;
+
+    return 1;
+}
+
+//删除节点
+int DeleteNode(Node* list, int position) {
+    if (position < 1) {
+        std::cout << "删除位置不合法！";
+        return 0;
+    }
+    Node* L = list->next;
+    for (int i = 0; i < position-1; i++) {
+        L = L->next;
+    }
+    if (L == nullptr) {
+        std::cout << "删除位置超出范围";
+        return 0;
+    }
+
+    if (L->next != nullptr) {
+        L->next->prev = L->prev;  // 让后继节点的 prev 指向 L 的 prev
+    }
+
+    if (L->prev != nullptr) {
+        L->prev->next = L->next;  // 让前驱节点的 next 指向 L 的 next
+    }
+    delete L;
+    return 1;
 }
 
 //双链表的遍历操作
@@ -62,5 +125,11 @@ int main() {
     HeadInsert(list,6);
     TailInsert(list,7);
     TailInsert(list,8);
+    Insert(list, 2,10);
+    Insert(list, 3,11);
+    ListElem(list);
+    DeleteNode(list, 2);
+    ListElem(list);
+    DeleteNode(list, 3);
     ListElem(list);
 }
